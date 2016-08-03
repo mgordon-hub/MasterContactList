@@ -26,5 +26,13 @@ namespace MasterContactListApplication
         {
 
         }
+
+        private void Button_Login_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            ListForm lf = new ListForm();
+            lf.ShowDialog();
+            this.Close();
+        }
     } 
 }
