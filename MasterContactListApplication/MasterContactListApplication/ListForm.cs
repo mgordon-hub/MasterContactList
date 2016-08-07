@@ -174,6 +174,7 @@ namespace MasterContactListApplication
 
         private void Button_SaveSearchEdit_Click(object sender, EventArgs e)
         {
+           
             try
             {
                 using (SqlConnection con = new SqlConnection(constring))
@@ -246,6 +247,7 @@ namespace MasterContactListApplication
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message);
+                        e.Cancel = true;
                     }
                 }
             }
@@ -466,16 +468,24 @@ namespace MasterContactListApplication
                     newContact.Klas = false;
                 }
 
-                db.Contact_List.Add(newContact);
-
-                try
+                if (db.Contact_List.Any(x => x.Email_Address == newContact.Email_Address))
                 {
-                    db.SaveChanges();
-                    MessageBox.Show("Contact Added Successfully");
+                    MessageBox.Show("Failed to create contact. Contact with Email Address " + newContact.Email_Address + " already exist. Operation aborted.");
                 }
-                catch(Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message);
+                    db.Contact_List.Add(newContact);
+
+                    try
+                    {
+
+                        db.SaveChanges();
+                        MessageBox.Show("Contact Added Successfully");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
 
             }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MasterContactListModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Contact_List">
           <Key>
             <PropertyRef Name="Email_Address" />
@@ -23,7 +23,7 @@
           <Property Name="Company" Type="varchar(max)" />
           <Property Name="Contract Coding Compnay" Type="varchar(max)" />
           <Property Name="City" Type="varchar" MaxLength="50" />
-          <Property Name="State" Type="varchar" MaxLength="2" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
           <Property Name="AE" Type="varchar" MaxLength="50" />
           <Property Name="EPS" Type="bit" />
           <Property Name="Simulator" Type="bit" />
@@ -46,14 +46,14 @@
           <Property Name="OI&amp;T Building Relationships" Type="bit" />
           <Property Name="Klas" Type="bit" />
         </EntityType>
-        <EntityContainer Name="DBStoreContainer">
+        <EntityContainer Name="MasterContactListModelStoreContainer">
           <EntitySet Name="Contact_List" EntityType="Self.Contact_List" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="MasterContactListModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Contact_List">
           <Key>
             <PropertyRef Name="Email_Address" />
@@ -72,7 +72,7 @@
           <Property Name="Company" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Contract_Coding_Compnay" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EPS" Type="Boolean" />
           <Property Name="Simulator" Type="Boolean" />
@@ -103,9 +103,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DBStoreContainer" CdmEntityContainer="MasterContactListEntities">
+        <EntityContainerMapping StorageEntityContainer="MasterContactListModelStoreContainer" CdmEntityContainer="MasterContactListEntities">
           <EntitySetMapping Name="Contact_List">
-            <EntityTypeMapping TypeName="DB.Contact_List">
+            <EntityTypeMapping TypeName="MasterContactListModel.Contact_List">
               <MappingFragment StoreEntitySet="Contact_List">
                 <ScalarProperty Name="First_Name" ColumnName="First_Name" />
                 <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
