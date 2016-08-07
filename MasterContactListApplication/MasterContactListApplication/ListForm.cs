@@ -21,7 +21,8 @@ namespace MasterContactListApplication
 
         Boolean searchDataGridHasChanged;
         string searchQuery;
-      
+        MasterContactListEntities db = new MasterContactListEntities();
+     
         public ListForm()
         {
 
@@ -35,6 +36,11 @@ namespace MasterContactListApplication
 
             searchDataGridHasChanged = false;
             dataGridView_SearchResults.AllowUserToAddRows = false;
+          
+
+            //dataGridView_SearchResults.ScrollBars = ScrollBars.Horizontal;
+            //dataGridView_SearchResults.AutoSize = true;
+            
         }
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -247,6 +253,232 @@ namespace MasterContactListApplication
             
 
 
+        }
+
+        private void Button_AddContact_Click(object sender, EventArgs e)
+        {
+            if(Textbox_FName.Text.Length > 0 && Textbox_Lname.Text.Length > 0 && Textbox_Email.Text.Length > 0)
+            {
+                Contact_List newContact = new Contact_List();
+
+                newContact.First_Name = Textbox_FName.Text;
+                newContact.Last_Name = Textbox_Lname.Text;
+                newContact.Email_Address = Textbox_Email.Text;
+                newContact.Phone_Number = Textbox_PhoneNumber.Text;
+                newContact.Title = Textbox_Title.Text;
+                newContact.Contact_Type = Textbox_ContactType.Text;
+                newContact.Department = Textbox_Department.Text;
+                newContact.Region = (int)numericUpDown1_Region.Value;
+                newContact.VISN = (int)numericUpDown2_VISN.Value;
+                newContact.Company = Textbox_Company.Text;
+                newContact.Contract_Coding_Compnay = Textbox_ContractCodingCompany.Text;
+                newContact.City = Textbox_City.Text;
+                newContact.State = Textbox_State.Text;
+                newContact.AE = Textbox_AE.Text;
+                newContact.E_Bulletin = Textbox_EBulletin.Text;
+
+                if(checkedListBox1.GetItemChecked(0) == true)
+                {
+                    newContact.Decision_Maker = true;
+                }
+                else
+                {
+                    newContact.Decision_Maker = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(1) == true)
+                {
+                    newContact.Budget_Holder = true;
+                }
+                else
+                {
+                    newContact.Budget_Holder = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(2) == true)
+                {
+                    newContact.EPS = true;
+                }
+                else
+                {
+                    newContact.EPS = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(3) == true)
+                {
+                    newContact.Simulator = true;
+                }
+                else
+                {
+                    newContact.Simulator = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(4) == true)
+                {
+                    newContact.VACC = true;
+                }
+                else
+                {
+                    newContact.VACC = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(5) == true)
+                {
+                    newContact.VACC_R_Notes = true;
+                }
+                else
+                {
+                    newContact.VACC_R_Notes = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(6) == true)
+                {
+                    newContact.CDI_Pro = true;
+                }
+                else
+                {
+                    newContact.CDI_Pro = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(7) == true)
+                {
+                    newContact.CDI_Pro_R_Notes = true;
+                }
+                else
+                {
+                    newContact.CDI_Pro_R_Notes = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(8) == true)
+                {
+                    newContact.VERA_Az = true;
+                }
+                else
+                {
+                    newContact.VERA_Az = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(9) == true)
+                {
+                    newContact.VERA_Az_R_Notes = true;
+                }
+                else
+                {
+                    newContact.VERA_Az_R_Notes = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(10) == true)
+                {
+                    newContact.OI_T= true;
+                }
+                else
+                {
+                    newContact.OI_T = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(11) == true)
+                {
+                    newContact.NHAC = true;
+                }
+                else
+                {
+                    newContact.NHAC = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(12) == true)
+                {
+                    newContact.Svc_Interrupt_Restore = true;
+                }
+                else
+                {
+                    newContact.Svc_Interrupt_Restore = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(13) == true)
+                {
+                    newContact.Webcast_Bulletin = true;
+                }
+                else
+                {
+                    newContact.Webcast_Bulletin = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(14) == true)
+                {
+                    newContact.iSupport_Account = true;
+                }
+                else
+                {
+                    newContact.iSupport_Account = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(15) == true)
+                {
+                    newContact.Bulletin_Reader = true;
+                }
+                else
+                {
+                    newContact.Bulletin_Reader = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(16) == true)
+                {
+                    newContact.NPS_Fall_2016 = true;
+                }
+                else
+                {
+                    newContact.NPS_Fall_2016 = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(17) == true)
+                {
+                    newContact.NPS_Spring_2016= true;
+                }
+                else
+                {
+                    newContact.NPS_Spring_2016 = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(18) == true)
+                {
+                    newContact.NPS_Spring_2015 = true;
+                }
+                else
+                {
+                    newContact.NPS_Spring_2015 = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(19) == true)
+                {
+                    newContact.OI_T_Building_Relationships = true;
+                }
+                else
+                {
+                    newContact.OI_T_Building_Relationships = false;
+                }
+
+                if (checkedListBox1.GetItemChecked(20) == true)
+                {
+                    newContact.Klas = true;
+                }
+                else
+                {
+                    newContact.Klas = false;
+                }
+
+                db.Contact_List.Add(newContact);
+
+                try
+                {
+                    db.SaveChanges();
+                    MessageBox.Show("Contact Added Successfully");
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+            }
         }
     }
 }

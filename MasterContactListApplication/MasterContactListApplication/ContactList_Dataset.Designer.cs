@@ -936,7 +936,7 @@ namespace MasterContactListApplication {
                 this.columnTitle.MaxLength = 50;
                 this.columnDepartment.MaxLength = 50;
                 this.columnCity.MaxLength = 50;
-                this.columnState.MaxLength = 2;
+                this.columnState.MaxLength = 50;
                 this.columnAE.MaxLength = 50;
                 this._columnE_Bulletin.MaxLength = 50;
             }

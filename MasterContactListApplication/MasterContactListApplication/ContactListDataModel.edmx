@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Contact_List">
+          <Key>
+            <PropertyRef Name="Email_Address" />
+          </Key>
+          <Property Name="First_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email_Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone Number" Type="varchar" MaxLength="50" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="Contact Type" Type="varchar(max)" />
+          <Property Name="Decision Maker" Type="bit" />
+          <Property Name="Budget Holder" Type="bit" />
+          <Property Name="Department" Type="varchar" MaxLength="50" />
+          <Property Name="Region" Type="int" />
+          <Property Name="VISN" Type="int" />
+          <Property Name="Company" Type="varchar(max)" />
+          <Property Name="Contract Coding Compnay" Type="varchar(max)" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="2" />
+          <Property Name="AE" Type="varchar" MaxLength="50" />
+          <Property Name="EPS" Type="bit" />
+          <Property Name="Simulator" Type="bit" />
+          <Property Name="VACC" Type="bit" />
+          <Property Name="VACC R Notes" Type="bit" />
+          <Property Name="CDI Pro" Type="bit" />
+          <Property Name="CDI Pro R Notes" Type="bit" />
+          <Property Name="VERA Az" Type="bit" />
+          <Property Name="VERA Az R Notes" Type="bit" />
+          <Property Name="OI&amp;T" Type="bit" />
+          <Property Name="NHAC" Type="bit" />
+          <Property Name="Svc Interrupt/Restore" Type="bit" />
+          <Property Name="E-Bulletin" Type="varchar" MaxLength="50" />
+          <Property Name="Webcast Bulletin" Type="bit" />
+          <Property Name="iSupport Account" Type="bit" />
+          <Property Name="Bulletin Reader" Type="bit" />
+          <Property Name="NPS Fall 2016" Type="bit" />
+          <Property Name="NPS Spring 2016" Type="bit" />
+          <Property Name="NPS Spring 2015" Type="bit" />
+          <Property Name="OI&amp;T Building Relationships" Type="bit" />
+          <Property Name="Klas" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="DBStoreContainer">
+          <EntitySet Name="Contact_List" EntityType="Self.Contact_List" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Contact_List">
+          <Key>
+            <PropertyRef Name="Email_Address" />
+          </Key>
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contact_Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Decision_Maker" Type="Boolean" />
+          <Property Name="Budget_Holder" Type="Boolean" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Region" Type="Int32" />
+          <Property Name="VISN" Type="Int32" />
+          <Property Name="Company" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Contract_Coding_Compnay" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="AE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EPS" Type="Boolean" />
+          <Property Name="Simulator" Type="Boolean" />
+          <Property Name="VACC" Type="Boolean" />
+          <Property Name="VACC_R_Notes" Type="Boolean" />
+          <Property Name="CDI_Pro" Type="Boolean" />
+          <Property Name="CDI_Pro_R_Notes" Type="Boolean" />
+          <Property Name="VERA_Az" Type="Boolean" />
+          <Property Name="VERA_Az_R_Notes" Type="Boolean" />
+          <Property Name="OI_T" Type="Boolean" />
+          <Property Name="NHAC" Type="Boolean" />
+          <Property Name="Svc_Interrupt_Restore" Type="Boolean" />
+          <Property Name="E_Bulletin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Webcast_Bulletin" Type="Boolean" />
+          <Property Name="iSupport_Account" Type="Boolean" />
+          <Property Name="Bulletin_Reader" Type="Boolean" />
+          <Property Name="NPS_Fall_2016" Type="Boolean" />
+          <Property Name="NPS_Spring_2016" Type="Boolean" />
+          <Property Name="NPS_Spring_2015" Type="Boolean" />
+          <Property Name="OI_T_Building_Relationships" Type="Boolean" />
+          <Property Name="Klas" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="MasterContactListEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contact_List" EntityType="Self.Contact_List" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBStoreContainer" CdmEntityContainer="MasterContactListEntities">
+          <EntitySetMapping Name="Contact_List">
+            <EntityTypeMapping TypeName="DB.Contact_List">
+              <MappingFragment StoreEntitySet="Contact_List">
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Email_Address" ColumnName="Email_Address" />
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone Number" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Contact_Type" ColumnName="Contact Type" />
+                <ScalarProperty Name="Decision_Maker" ColumnName="Decision Maker" />
+                <ScalarProperty Name="Budget_Holder" ColumnName="Budget Holder" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="VISN" ColumnName="VISN" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Contract_Coding_Compnay" ColumnName="Contract Coding Compnay" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="AE" ColumnName="AE" />
+                <ScalarProperty Name="EPS" ColumnName="EPS" />
+                <ScalarProperty Name="Simulator" ColumnName="Simulator" />
+                <ScalarProperty Name="VACC" ColumnName="VACC" />
+                <ScalarProperty Name="VACC_R_Notes" ColumnName="VACC R Notes" />
+                <ScalarProperty Name="CDI_Pro" ColumnName="CDI Pro" />
+                <ScalarProperty Name="CDI_Pro_R_Notes" ColumnName="CDI Pro R Notes" />
+                <ScalarProperty Name="VERA_Az" ColumnName="VERA Az" />
+                <ScalarProperty Name="VERA_Az_R_Notes" ColumnName="VERA Az R Notes" />
+                <ScalarProperty Name="OI_T" ColumnName="OI&amp;T" />
+                <ScalarProperty Name="NHAC" ColumnName="NHAC" />
+                <ScalarProperty Name="Svc_Interrupt_Restore" ColumnName="Svc Interrupt/Restore" />
+                <ScalarProperty Name="E_Bulletin" ColumnName="E-Bulletin" />
+                <ScalarProperty Name="Webcast_Bulletin" ColumnName="Webcast Bulletin" />
+                <ScalarProperty Name="iSupport_Account" ColumnName="iSupport Account" />
+                <ScalarProperty Name="Bulletin_Reader" ColumnName="Bulletin Reader" />
+                <ScalarProperty Name="NPS_Fall_2016" ColumnName="NPS Fall 2016" />
+                <ScalarProperty Name="NPS_Spring_2016" ColumnName="NPS Spring 2016" />
+                <ScalarProperty Name="NPS_Spring_2015" ColumnName="NPS Spring 2015" />
+                <ScalarProperty Name="OI_T_Building_Relationships" ColumnName="OI&amp;T Building Relationships" />
+                <ScalarProperty Name="Klas" ColumnName="Klas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
