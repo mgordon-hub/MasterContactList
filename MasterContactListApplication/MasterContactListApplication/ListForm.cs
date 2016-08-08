@@ -18,6 +18,7 @@ namespace MasterContactListApplication
         DataTable searchDt = new DataTable();
         string constring = System.Configuration.ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
         SqlDataAdapter da;
+        int indexOfRowToDelete;
 
         Boolean searchDataGridHasChanged;
         string searchQuery;
@@ -108,7 +109,7 @@ namespace MasterContactListApplication
                         {
                             dataGridView_SearchResults.DataSource = searchDt;
                             dataGridView_SearchResults.Visible = true;
-
+              
                             searchDataGridHasChanged = false;
 
                             Label_SearchResults.Text = searchDt.Rows.Count.ToString() + " Result(s) found with Last Name: " + Textbox_LastOrEmail.Text;
@@ -476,10 +477,13 @@ namespace MasterContactListApplication
                 {
                     db.Contact_List.Add(newContact);
 
+
                     try
                     {
 
                         db.SaveChanges();
+
+                        foreach()
                         MessageBox.Show("Contact Added Successfully");
                     }
                     catch (Exception ex)
@@ -488,6 +492,88 @@ namespace MasterContactListApplication
                     }
                 }
 
+            }
+            else
+            {
+                MessageBox.Show("First and Last Name required");
+            }
+        }
+
+        private void dataGridView1_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+            {
+                this.dataGridView1.Rows[e.RowIndex].Selected = true;
+                this.indexOfRowToDelete = e.RowIndex;
+                this.dataGridView1.CurrentCell = this.dataGridView1.Rows[e.RowIndex].Cells[1];
+                this.ContextMenuStrip_DeleteRow.Show(this.dataGridView1, e.Location);
+                ContextMenuStrip_DeleteRow.Show(Cursor.Position);
+            }
+        }
+
+        private void ContextMenuStrip_DeleteRow_Click(object sender, EventArgs e)
+        {
+            DeleteRowConfirmation deleteForm = new DeleteRowConfirmation();
+            deleteForm.ShowDialog();
+
+            //If deleted from tab2, delete from tab 1 also.
+            if (deleteForm.AreYouSureYouWantToDeleteThisRow == true)
+            {
+                if (Tab_Control.SelectedTab == Tab_Search)
+                {
+                    if (!this.dataGridView_SearchResults.Rows[this.indexOfRowToDelete].IsNewRow)
+                    {
+                        this.dataGridView_SearchResults.Rows.RemoveAt(this.indexOfRowToDelete);
+                    }
+                }
+            }
+
+            if (deleteForm.AreYouSureYouWantToDeleteThisRow == true)
+            {
+                string email = dataGridView1.Rows[this.indexOfRowToDelete].Cells["Email_Address"].Value.ToString();
+                var contactToDelete = db.Contact_List.Where(x => x.Email_Address ==  email).FirstOrDefault();
+
+                if (!this.dataGridView1.Rows[this.indexOfRowToDelete].IsNewRow)
+                {
+                    this.dataGridView1.Rows.RemoveAt(this.indexOfRowToDelete);
+
+                    //If deleted row is from tab 1, and this row is in tab2 data grid, remove it also.
+                    for (int i = 0; i < dataGridView_SearchResults.Rows.Count; i++)
+                    {
+                        
+                            if( dataGridView_SearchResults.Rows[i].Cells["Email_Address"].Value.ToString() == email)
+                            {
+                                dataGridView_SearchResults.Rows.RemoveAt(i);
+                            }
+                        
+                        
+                    }
+                }
+               
+          
+                
+                try
+                {
+                    db.Contact_List.Remove(contactToDelete);
+                    db.SaveChanges();
+         
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void dataGridView_SearchResults_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                this.dataGridView_SearchResults.Rows[e.RowIndex].Selected = true;
+                this.indexOfRowToDelete = e.RowIndex;
+                this.dataGridView_SearchResults.CurrentCell = this.dataGridView_SearchResults.Rows[e.RowIndex].Cells[1];
+                this.ContextMenuStrip_DeleteRow.Show(this.dataGridView_SearchResults, e.Location);
+                ContextMenuStrip_DeleteRow.Show(Cursor.Position);
             }
         }
     }

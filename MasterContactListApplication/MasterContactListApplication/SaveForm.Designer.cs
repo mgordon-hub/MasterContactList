@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaveForm));
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Button_Save = new System.Windows.Forms.Button();
@@ -81,6 +82,7 @@
             this.Controls.Add(this.Button_Save);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SaveForm";
             this.Text = "SaveForm";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
