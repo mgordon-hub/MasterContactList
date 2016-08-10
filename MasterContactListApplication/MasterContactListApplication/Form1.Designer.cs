@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label_MasterContactList = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.Textbox_Username = new System.Windows.Forms.TextBox();
+            this.Textbox_Password = new System.Windows.Forms.TextBox();
             this.Button_Login = new System.Windows.Forms.Button();
             this.Label_Username = new System.Windows.Forms.Label();
             this.Label_Password = new System.Windows.Forms.Label();
@@ -49,19 +49,19 @@
             this.label_MasterContactList.Text = "Master Contact List";
             this.label_MasterContactList.Click += new System.EventHandler(this.label1_Click);
             // 
-            // textBox1
+            // Textbox_Username
             // 
-            this.textBox1.Location = new System.Drawing.Point(76, 189);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(191, 20);
-            this.textBox1.TabIndex = 1;
+            this.Textbox_Username.Location = new System.Drawing.Point(76, 189);
+            this.Textbox_Username.Name = "Textbox_Username";
+            this.Textbox_Username.Size = new System.Drawing.Size(191, 20);
+            this.Textbox_Username.TabIndex = 1;
             // 
-            // textBox2
+            // Textbox_Password
             // 
-            this.textBox2.Location = new System.Drawing.Point(76, 251);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(191, 20);
-            this.textBox2.TabIndex = 2;
+            this.Textbox_Password.Location = new System.Drawing.Point(76, 251);
+            this.Textbox_Password.Name = "Textbox_Password";
+            this.Textbox_Password.Size = new System.Drawing.Size(191, 20);
+            this.Textbox_Password.TabIndex = 2;
             // 
             // Button_Login
             // 
@@ -110,8 +110,8 @@
             this.Controls.Add(this.Label_Password);
             this.Controls.Add(this.Label_Username);
             this.Controls.Add(this.Button_Login);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.Textbox_Password);
+            this.Controls.Add(this.Textbox_Username);
             this.Controls.Add(this.label_MasterContactList);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -125,8 +125,8 @@
         #endregion
 
         private System.Windows.Forms.Label label_MasterContactList;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox Textbox_Username;
+        private System.Windows.Forms.TextBox Textbox_Password;
         private System.Windows.Forms.Button Button_Login;
         private System.Windows.Forms.Label Label_Username;
         private System.Windows.Forms.Label Label_Password;

@@ -26,5 +26,6 @@ namespace MasterContactListApplication
         }
     
         public virtual DbSet<Contact_List> Contact_List { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

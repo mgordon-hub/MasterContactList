@@ -483,7 +483,10 @@ namespace MasterContactListApplication
 
                         db.SaveChanges();
 
-                        foreach()
+                       // DataRow dr = new DataRow();
+                      object[] dr  = new object[] { newContact.First_Name, newContact.Last_Name, newContact.Email_Address, newContact.Phone_Number, newContact.Title, newContact.Contact_Type, newContact.Decision_Maker, newContact.Budget_Holder, newContact.Department, newContact.Region, newContact.VISN, newContact.Company, newContact.Contract_Coding_Compnay, newContact.City, newContact.State, newContact.AE, newContact.EPS, newContact.Simulator, newContact.VACC, newContact.VACC_R_Notes, newContact.CDI_Pro, newContact.CDI_Pro_R_Notes,  newContact.VERA_Az, newContact.VERA_Az_R_Notes, newContact.OI_T, newContact.NHAC, newContact.Svc_Interrupt_Restore, newContact.E_Bulletin, newContact.Webcast_Bulletin, newContact.iSupport_Account, newContact.Bulletin_Reader, newContact.NPS_Fall_2016, newContact.NPS_Spring_2016, newContact.NPS_Spring_2015, newContact.OI_T_Building_Relationships, newContact.Klas};
+                        ds.Tables[0].Rows.Add(dr);
+
                         MessageBox.Show("Contact Added Successfully");
                     }
                     catch (Exception ex)
@@ -501,13 +504,16 @@ namespace MasterContactListApplication
 
         private void dataGridView1_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Right)
+            if (e.RowIndex != -1)
             {
-                this.dataGridView1.Rows[e.RowIndex].Selected = true;
-                this.indexOfRowToDelete = e.RowIndex;
-                this.dataGridView1.CurrentCell = this.dataGridView1.Rows[e.RowIndex].Cells[1];
-                this.ContextMenuStrip_DeleteRow.Show(this.dataGridView1, e.Location);
-                ContextMenuStrip_DeleteRow.Show(Cursor.Position);
+                if (e.Button == MouseButtons.Right)
+                {
+                    this.dataGridView1.Rows[e.RowIndex].Selected = true;
+                    this.indexOfRowToDelete = e.RowIndex;
+                    this.dataGridView1.CurrentCell = this.dataGridView1.Rows[e.RowIndex].Cells[1];
+                    this.ContextMenuStrip_DeleteRow.Show(this.dataGridView1, e.Location);
+                    ContextMenuStrip_DeleteRow.Show(Cursor.Position);
+                }
             }
         }
 
@@ -567,13 +573,16 @@ namespace MasterContactListApplication
 
         private void dataGridView_SearchResults_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            if (e.RowIndex != -1)
             {
-                this.dataGridView_SearchResults.Rows[e.RowIndex].Selected = true;
-                this.indexOfRowToDelete = e.RowIndex;
-                this.dataGridView_SearchResults.CurrentCell = this.dataGridView_SearchResults.Rows[e.RowIndex].Cells[1];
-                this.ContextMenuStrip_DeleteRow.Show(this.dataGridView_SearchResults, e.Location);
-                ContextMenuStrip_DeleteRow.Show(Cursor.Position);
+                if (e.Button == MouseButtons.Right)
+                {
+                    this.dataGridView_SearchResults.Rows[e.RowIndex].Selected = true;
+                    this.indexOfRowToDelete = e.RowIndex;
+                    this.dataGridView_SearchResults.CurrentCell = this.dataGridView_SearchResults.Rows[e.RowIndex].Cells[1];
+                    this.ContextMenuStrip_DeleteRow.Show(this.dataGridView_SearchResults, e.Location);
+                    ContextMenuStrip_DeleteRow.Show(Cursor.Position);
+                }
             }
         }
     }

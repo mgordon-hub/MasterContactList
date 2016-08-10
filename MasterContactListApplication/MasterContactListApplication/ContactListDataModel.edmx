@@ -46,8 +46,16 @@
           <Property Name="OI&amp;T Building Relationships" Type="bit" />
           <Property Name="Klas" Type="bit" />
         </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar(max)" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="MasterContactListModelStoreContainer">
           <EntitySet Name="Contact_List" EntityType="Self.Contact_List" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -95,8 +103,16 @@
           <Property Name="OI_T_Building_Relationships" Type="Boolean" />
           <Property Name="Klas" Type="Boolean" />
         </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="MasterContactListEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Contact_List" EntityType="Self.Contact_List" />
+          <EntitySet Name="Users" EntityType="Self.User" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -143,6 +159,14 @@
                 <ScalarProperty Name="NPS_Spring_2015" ColumnName="NPS Spring 2015" />
                 <ScalarProperty Name="OI_T_Building_Relationships" ColumnName="OI&amp;T Building Relationships" />
                 <ScalarProperty Name="Klas" ColumnName="Klas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MasterContactListModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -114,6 +114,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TestDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>ContactListDataModel.tt</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DeleteRowConfirmation.resx">
       <DependentUpon>DeleteRowConfirmation.cs</DependentUpon>
     </EmbeddedResource>
