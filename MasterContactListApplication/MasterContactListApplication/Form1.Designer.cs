@@ -60,8 +60,10 @@
             // 
             this.Textbox_Password.Location = new System.Drawing.Point(76, 251);
             this.Textbox_Password.Name = "Textbox_Password";
+            this.Textbox_Password.PasswordChar = '*';
             this.Textbox_Password.Size = new System.Drawing.Size(191, 20);
             this.Textbox_Password.TabIndex = 2;
+            this.Textbox_Password.Text = "4";
             // 
             // Button_Login
             // 

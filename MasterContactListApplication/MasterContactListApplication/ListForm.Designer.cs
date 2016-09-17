@@ -39,6 +39,7 @@
             this.contact_ListTableAdapter = new MasterContactListApplication.ContactList_DatasetTableAdapters.Contact_ListTableAdapter();
             this.Tab_Control = new System.Windows.Forms.TabControl();
             this.Tab_ViewAllContact = new System.Windows.Forms.TabPage();
+            this.Button_SaveListEdit = new System.Windows.Forms.Button();
             this.Tab_Search = new System.Windows.Forms.TabPage();
             this.Button_SaveSearchEdit = new System.Windows.Forms.Button();
             this.Label_SearchResults = new System.Windows.Forms.Label();
@@ -104,12 +105,12 @@
             // 
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 3);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 33);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(1115, 435);
             this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseUp);
+            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             // 
             // contactListBindingSource
             // 
@@ -152,6 +153,7 @@
             // 
             // Tab_ViewAllContact
             // 
+            this.Tab_ViewAllContact.Controls.Add(this.Button_SaveListEdit);
             this.Tab_ViewAllContact.Controls.Add(this.dataGridView1);
             this.Tab_ViewAllContact.Location = new System.Drawing.Point(4, 22);
             this.Tab_ViewAllContact.Name = "Tab_ViewAllContact";
@@ -160,6 +162,16 @@
             this.Tab_ViewAllContact.TabIndex = 0;
             this.Tab_ViewAllContact.Text = "View All Contacts";
             this.Tab_ViewAllContact.UseVisualStyleBackColor = true;
+            // 
+            // Button_SaveListEdit
+            // 
+            this.Button_SaveListEdit.Location = new System.Drawing.Point(989, 4);
+            this.Button_SaveListEdit.Name = "Button_SaveListEdit";
+            this.Button_SaveListEdit.Size = new System.Drawing.Size(102, 23);
+            this.Button_SaveListEdit.TabIndex = 1;
+            this.Button_SaveListEdit.Text = "Save";
+            this.Button_SaveListEdit.UseVisualStyleBackColor = true;
+            this.Button_SaveListEdit.Click += new System.EventHandler(this.Button_SaveListEdit_Click);
             // 
             // Tab_Search
             // 
@@ -709,5 +721,6 @@
         private System.Windows.Forms.Button Button_AddContact;
         private System.Windows.Forms.ContextMenuStrip ContextMenuStrip_DeleteRow;
         private System.Windows.Forms.ToolStripMenuItem deleteRowToolStripMenuItem;
+        private System.Windows.Forms.Button Button_SaveListEdit;
     }
 }

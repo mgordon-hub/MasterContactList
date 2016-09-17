@@ -34,18 +34,26 @@ namespace MasterContactListApplication
         private void Button_Login_Click(object sender, EventArgs e)
         {
             var user = db.Users.Where(x => x.Username == Textbox_Username.Text).FirstOrDefault();
-
-            if (ValidateSHA1HashData(Textbox_Password.Text.ToString(), user.Password) == true)
-            {
-
-                this.Hide();
-                ListForm lf = new ListForm();
-                lf.ShowDialog();
-                this.Close();
-           }
-            else
+            if (user == null)
             {
                 MessageBox.Show("Invalid Username or Password");
+            }
+            else
+            {
+
+
+                if (ValidateSHA1HashData(Textbox_Password.Text.ToString(), user.Password) == true)
+                {
+
+                    this.Hide();
+                    ListForm lf = new ListForm();
+                    lf.ShowDialog();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Username or Password");
+                }
             }
         }
 

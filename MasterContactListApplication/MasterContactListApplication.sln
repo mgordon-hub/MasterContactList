@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterContactListApplication", "MasterContactListApplication\MasterContactListApplication.csproj", "{58584D63-8C24-4ECA-AEBA-BD4E884C84EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelUpload", "ExcelUpload\ExcelUpload.csproj", "{CF4468B3-332F-480A-8FAD-2D43ACF30A2E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{58584D63-8C24-4ECA-AEBA-BD4E884C84EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58584D63-8C24-4ECA-AEBA-BD4E884C84EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58584D63-8C24-4ECA-AEBA-BD4E884C84EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF4468B3-332F-480A-8FAD-2D43ACF30A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF4468B3-332F-480A-8FAD-2D43ACF30A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF4468B3-332F-480A-8FAD-2D43ACF30A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF4468B3-332F-480A-8FAD-2D43ACF30A2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

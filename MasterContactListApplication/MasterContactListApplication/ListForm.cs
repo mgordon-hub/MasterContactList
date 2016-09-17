@@ -21,6 +21,7 @@ namespace MasterContactListApplication
         int indexOfRowToDelete;
 
         Boolean searchDataGridHasChanged;
+        Boolean listDataGridHasChanged;
         string searchQuery;
         MasterContactListEntities db = new MasterContactListEntities();
      
@@ -41,26 +42,6 @@ namespace MasterContactListApplication
 
             //dataGridView_SearchResults.ScrollBars = ScrollBars.Horizontal;
             //dataGridView_SearchResults.AutoSize = true;
-            
-        }
-
-        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                using (SqlConnection con = new SqlConnection(constring))
-                {
-                    var cm = dataGridView1.BindingContext[ds, "Contact_List"];
-                    cm.EndCurrentEdit();
-                    con.Open();
-                    da.Update(ds, "Contact_List");
-                    con.Close();
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
             
         }
 
@@ -175,38 +156,49 @@ namespace MasterContactListApplication
 
         private void Button_SaveSearchEdit_Click(object sender, EventArgs e)
         {
-           
-            try
+            if (searchDataGridHasChanged == true)
             {
-                using (SqlConnection con = new SqlConnection(constring))
+                try
                 {
-                    SqlDataAdapter searchDa = new SqlDataAdapter(searchQuery,con);
-                    SqlCommandBuilder cmd = new SqlCommandBuilder(searchDa);
-                    var cm = dataGridView_SearchResults.BindingContext[searchDt];
-                    cm.EndCurrentEdit();
+                    using (SqlConnection con = new SqlConnection(constring))
+                    {
+                        SqlDataAdapter searchDa = new SqlDataAdapter(searchQuery, con);
+                        SqlCommandBuilder cmd = new SqlCommandBuilder(searchDa);
+                        var cm = dataGridView_SearchResults.BindingContext[searchDt];
+                        cm.EndCurrentEdit();
 
-         
-                    con.Open();
-                    searchDa.Update(searchDt);
-                    con.Close();
 
-                    searchDataGridHasChanged = false;
+                        con.Open();
+                        searchDa.Update(searchDt);
+                        con.Close();
 
-                    MessageBox.Show("Upates Saved Succesfully");
-                    Button_SaveSearchEdit.BackColor = Color.Transparent;
+                        searchDataGridHasChanged = false;
+
+                        MessageBox.Show("Upates Saved Succesfully");
+                        Button_SaveSearchEdit.BackColor = Color.Transparent;
+
+
+                        da = new SqlDataAdapter("Select * From Contact_List", con);
+                        SqlCommandBuilder cmd2 = new SqlCommandBuilder(da);
+
+                        ds.Tables[0].Clear();
+                        da.Fill(ds.Tables[0]);
+                        dataGridView1.DataSource = ds.Tables[0];
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("No changes to save. Operation Aborted.");
             }
         }
 
-        private void dataGridView_SearchResults_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            searchDataGridHasChanged = true;
-            Button_SaveSearchEdit.BackColor = Color.Red;
-        }
+       
 
         private void dataGridView_SearchResults_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
@@ -217,38 +209,68 @@ namespace MasterContactListApplication
         private void ListForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             dataGridView_SearchResults.EndEdit();
+            dataGridView1.EndEdit();
 
-            if(searchDataGridHasChanged == true)
+            if(searchDataGridHasChanged == true || listDataGridHasChanged == true)
             {
-              //  MessageBox.Show("Do you want to save your changes? If you click ");
                 SaveForm saveForm = new SaveForm();
                 saveForm.ShowDialog();
 
                 if(saveForm.WantToSave == true)
                 {
-                    try
+                    if (Tab_Control.SelectedTab == Tab_Search)
                     {
-                        using (SqlConnection con = new SqlConnection(constring))
+                        try
                         {
-                            SqlDataAdapter searchDa = new SqlDataAdapter(searchQuery, con);
-                            SqlCommandBuilder cmd = new SqlCommandBuilder(searchDa);
-                            var cm = dataGridView_SearchResults.BindingContext[searchDt];
-                            cm.EndCurrentEdit();
+                            using (SqlConnection con = new SqlConnection(constring))
+                            {
+                                SqlDataAdapter searchDa = new SqlDataAdapter(searchQuery, con);
+                                SqlCommandBuilder cmd = new SqlCommandBuilder(searchDa);
+                                var cm = dataGridView_SearchResults.BindingContext[searchDt];
+                                cm.EndCurrentEdit();
 
 
-                            con.Open();
-                            searchDa.Update(searchDt);
-                            con.Close();
+                                con.Open();
+                                searchDa.Update(searchDt);
+                                con.Close();
 
-                            searchDataGridHasChanged = false;
+                                searchDataGridHasChanged = false;
 
-                            MessageBox.Show("Upates Saved Succesfully");
+                                MessageBox.Show("Upates Saved Succesfully");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                            e.Cancel = true;
                         }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show(ex.Message);
-                        e.Cancel = true;
+                        try
+                        {
+                            using (SqlConnection con = new SqlConnection(constring))
+                            {
+                                SqlDataAdapter listDa = new SqlDataAdapter("SELECT * FROM Contact_List", con);
+                                SqlCommandBuilder cmd = new SqlCommandBuilder(listDa);
+                                var cm = dataGridView1.BindingContext[ds.Tables[0]];
+                                cm.EndCurrentEdit();
+
+
+                                con.Open();
+                                listDa.Update(ds.Tables[0]);
+                                con.Close();
+
+                                listDataGridHasChanged = false;
+
+                                MessageBox.Show("Upates Saved Succesfully");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                            e.Cancel = true;
+                        }
                     }
                 }
             }
@@ -484,7 +506,7 @@ namespace MasterContactListApplication
                         db.SaveChanges();
 
                        // DataRow dr = new DataRow();
-                      object[] dr  = new object[] { newContact.First_Name, newContact.Last_Name, newContact.Email_Address, newContact.Phone_Number, newContact.Title, newContact.Contact_Type, newContact.Decision_Maker, newContact.Budget_Holder, newContact.Department, newContact.Region, newContact.VISN, newContact.Company, newContact.Contract_Coding_Compnay, newContact.City, newContact.State, newContact.AE, newContact.EPS, newContact.Simulator, newContact.VACC, newContact.VACC_R_Notes, newContact.CDI_Pro, newContact.CDI_Pro_R_Notes,  newContact.VERA_Az, newContact.VERA_Az_R_Notes, newContact.OI_T, newContact.NHAC, newContact.Svc_Interrupt_Restore, newContact.E_Bulletin, newContact.Webcast_Bulletin, newContact.iSupport_Account, newContact.Bulletin_Reader, newContact.NPS_Fall_2016, newContact.NPS_Spring_2016, newContact.NPS_Spring_2015, newContact.OI_T_Building_Relationships, newContact.Klas};
+                        object[] dr  = new object[] { newContact.First_Name, newContact.Last_Name, newContact.Email_Address, newContact.Phone_Number, newContact.Title, newContact.Contact_Type, newContact.Decision_Maker, newContact.Budget_Holder, newContact.Department, newContact.Region, newContact.VISN, newContact.Company, newContact.Contract_Coding_Compnay, newContact.City, newContact.State, newContact.AE, newContact.EPS, newContact.Simulator, newContact.VACC, newContact.VACC_R_Notes, newContact.CDI_Pro, newContact.CDI_Pro_R_Notes,  newContact.VERA_Az, newContact.VERA_Az_R_Notes, newContact.OI_T, newContact.NHAC, newContact.Svc_Interrupt_Restore, newContact.E_Bulletin, newContact.Webcast_Bulletin, newContact.iSupport_Account, newContact.Bulletin_Reader, newContact.NPS_Fall_2016, newContact.NPS_Spring_2016, newContact.NPS_Spring_2015, newContact.OI_T_Building_Relationships, newContact.Klas};
                         ds.Tables[0].Rows.Add(dr);
 
                         MessageBox.Show("Contact Added Successfully");
@@ -498,7 +520,7 @@ namespace MasterContactListApplication
             }
             else
             {
-                MessageBox.Show("First and Last Name required");
+                MessageBox.Show("First/Last Name and Email required");
             }
         }
 
@@ -519,6 +541,8 @@ namespace MasterContactListApplication
 
         private void ContextMenuStrip_DeleteRow_Click(object sender, EventArgs e)
         {
+            string emailOfContactInSearchTab = "";
+            string emailToDelete;
             DeleteRowConfirmation deleteForm = new DeleteRowConfirmation();
             deleteForm.ShowDialog();
 
@@ -527,6 +551,7 @@ namespace MasterContactListApplication
             {
                 if (Tab_Control.SelectedTab == Tab_Search)
                 {
+                    emailOfContactInSearchTab = dataGridView_SearchResults.Rows[this.indexOfRowToDelete].Cells["Email_Address"].Value.ToString();
                     if (!this.dataGridView_SearchResults.Rows[this.indexOfRowToDelete].IsNewRow)
                     {
                         this.dataGridView_SearchResults.Rows.RemoveAt(this.indexOfRowToDelete);
@@ -536,23 +561,44 @@ namespace MasterContactListApplication
 
             if (deleteForm.AreYouSureYouWantToDeleteThisRow == true)
             {
-                string email = dataGridView1.Rows[this.indexOfRowToDelete].Cells["Email_Address"].Value.ToString();
-                var contactToDelete = db.Contact_List.Where(x => x.Email_Address ==  email).FirstOrDefault();
-
-                if (!this.dataGridView1.Rows[this.indexOfRowToDelete].IsNewRow)
+                if(Tab_Control.SelectedTab == Tab_Search)
                 {
-                    this.dataGridView1.Rows.RemoveAt(this.indexOfRowToDelete);
-
-                    //If deleted row is from tab 1, and this row is in tab2 data grid, remove it also.
-                    for (int i = 0; i < dataGridView_SearchResults.Rows.Count; i++)
+                    emailToDelete = emailOfContactInSearchTab;
+                }
+                else
+                {
+                    emailToDelete = dataGridView1.Rows[this.indexOfRowToDelete].Cells["Email_Address"].Value.ToString();
+                }
+                
+                var contactToDelete = db.Contact_List.Where(x => x.Email_Address ==  emailToDelete).FirstOrDefault();
+                //if current tab is search when deleting, search first tab grid for matching email address and delete it
+                if (Tab_Control.SelectedTab == Tab_Search)
+                {
+                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
                     {
-                        
-                            if( dataGridView_SearchResults.Rows[i].Cells["Email_Address"].Value.ToString() == email)
+                        if (dataGridView1.Rows[i].Cells["Email_Address"].Value.ToString() == emailToDelete)
+                        {
+                            dataGridView1.Rows.RemoveAt(i);
+                        }
+                    }
+                }
+                else//If on first tab, just delete item from first tab
+                {
+                    if (!this.dataGridView1.Rows[this.indexOfRowToDelete].IsNewRow)
+                    {
+                        this.dataGridView1.Rows.RemoveAt(this.indexOfRowToDelete);
+
+                        //If deleted row is from tab 1, and this row is in tab2 data grid, remove it also.
+                        for (int i = 0; i < dataGridView_SearchResults.Rows.Count; i++)
+                        {
+
+                            if (dataGridView_SearchResults.Rows[i].Cells["Email_Address"].Value.ToString() == emailToDelete)
                             {
                                 dataGridView_SearchResults.Rows.RemoveAt(i);
                             }
-                        
-                        
+
+
+                        }
                     }
                 }
                
@@ -562,6 +608,8 @@ namespace MasterContactListApplication
                 {
                     db.Contact_List.Remove(contactToDelete);
                     db.SaveChanges();
+
+                    Label_SearchResults.Text = "";
          
                 }
                 catch (Exception ex)
@@ -583,6 +631,61 @@ namespace MasterContactListApplication
                     this.ContextMenuStrip_DeleteRow.Show(this.dataGridView_SearchResults, e.Location);
                     ContextMenuStrip_DeleteRow.Show(Cursor.Position);
                 }
+            }
+        }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            listDataGridHasChanged = true;
+            Button_SaveListEdit.BackColor = Color.Red;
+        }
+
+        private void dataGridView_SearchResults_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            searchDataGridHasChanged = true;
+            Button_SaveSearchEdit.BackColor = Color.Red;
+        }
+
+        private void Button_SaveListEdit_Click(object sender, EventArgs e)
+        {
+            if (listDataGridHasChanged == true)
+            {
+                try
+                {
+                    using (SqlConnection con = new SqlConnection(constring))
+                    {
+                        SqlDataAdapter listDa = new SqlDataAdapter("Select * from Contact_List", con);
+                        SqlCommandBuilder cmd = new SqlCommandBuilder(listDa);
+                        var cm = dataGridView1.BindingContext[ds.Tables[0]];
+                        cm.EndCurrentEdit();
+
+
+                        con.Open();
+                        listDa.Update(ds.Tables[0]);
+                        con.Close();
+
+                        listDataGridHasChanged = false;
+
+                        MessageBox.Show("Upates Saved Succesfully");
+                        Button_SaveListEdit.BackColor = Color.Transparent;
+
+                        dataGridView_SearchResults.DataSource = null;
+                        dataGridView_SearchResults.Rows.Clear();
+
+                        Label_SearchResults.Text = "";
+
+
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No changes to save. Operation Aborted.");
             }
         }
     }
