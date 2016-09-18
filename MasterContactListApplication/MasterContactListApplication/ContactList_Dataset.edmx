@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MasterContactList.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MasterContactListEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Contact_List">
           <Key>
             <PropertyRef Name="Email_Address" />
@@ -53,7 +53,7 @@
           <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="varchar(max)" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="MasterContactListStoreContainer">
+        <EntityContainer Name="MasterContactListEntitiesStoreContainer">
           <EntitySet Name="Contact_List" EntityType="Self.Contact_List" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -61,7 +61,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="MasterContactList" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="MasterContactListEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Contact_List">
           <Key>
             <PropertyRef Name="Email_Address" />
@@ -110,7 +110,7 @@
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="MasterContactListEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Master_Contact_ListEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Contact_List" EntityType="Self.Contact_List" />
           <EntitySet Name="Users" EntityType="Self.User" />
         </EntityContainer>
@@ -119,9 +119,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MasterContactListStoreContainer" CdmEntityContainer="MasterContactListEntities">
+        <EntityContainerMapping StorageEntityContainer="MasterContactListEntitiesStoreContainer" CdmEntityContainer="Master_Contact_ListEntities">
           <EntitySetMapping Name="Contact_List">
-            <EntityTypeMapping TypeName="MasterContactList.Contact_List">
+            <EntityTypeMapping TypeName="MasterContactListEntities.Contact_List">
               <MappingFragment StoreEntitySet="Contact_List">
                 <ScalarProperty Name="First_Name" ColumnName="First_Name" />
                 <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
@@ -163,7 +163,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="MasterContactList.User">
+            <EntityTypeMapping TypeName="MasterContactListEntities.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

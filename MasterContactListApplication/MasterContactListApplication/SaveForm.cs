@@ -26,7 +26,8 @@ namespace MasterContactListApplication
         {
             
             InitializeComponent();
-            pictureBox1.Image = Image.FromFile("../../Pictures/saveWarning.PNG");
+            this.CenterToScreen();
+            pictureBox1.Image = Properties.Resources.saveWarning;
         }
 
         private void Button_Save_Click(object sender, EventArgs e)

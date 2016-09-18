@@ -29,6 +29,7 @@ namespace MasterContactListApplication
         {
 
             InitializeComponent();
+            this.CenterToScreen();
             da = new SqlDataAdapter("Select * from Contact_List", constring);
             SqlCommandBuilder cmb = new SqlCommandBuilder(da);
      
